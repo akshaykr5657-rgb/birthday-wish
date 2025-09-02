@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday, Muskan ❤️</title>
+  <meta name="description" content="A sweet, single‑file birthday website for Muskan.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg1:#ffdee9; /* light pink */
+      --bg2:#b5fffc; /* mint */
+      --ink:#2a2a2a;
+      --accent:#ff4d6d; /* rose */
+      --accent-2:#7c4dff; /* purple */
+      --card:#ffffffee;
+      --glass:rgba(255,255,255,.6);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; color:var(--ink); font-family:Poppins, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; 
+      background: linear-gradient(120deg, var(--bg1), var(--bg2));
+      background-attachment: fixed;
+      overflow-x:hidden;
+      -webkit-text-size-adjust: 100%; /* Prevent font scaling in landscape */
+    }
+    .wrap{max-width:1100px; margin-inline:auto; padding:clamp(16px,4vw,28px)}
+    
+    /* Glass card */
+    .card{
+      background:var(--card); 
+      backdrop-filter: blur(8px); 
+      border-radius:24px; 
+      box-shadow:0 20px 50px rgba(0,0,0,.08); 
+      padding:clamp(16px,3vw,28px);
+      margin-bottom: 20px;
+    }
+
+    /* Hero */
+    header{
+      position:relative; 
+      overflow:hidden; 
+      border-radius:28px; 
+      padding: clamp(24px, 5vw, 48px);
+      background:
+        radial-gradient(60rem 20rem at 10% -10%, rgba(255,255,255,.7), transparent 50%),
+        radial-gradient(40rem 20rem at 110% 110%, rgba(255,255,255,.5), transparent 50%),
+        linear-gradient(120deg, rgba(255,255,255,.35), rgba(255,255,255,.15));
+    }
+    .title{display:flex; flex-direction:column; gap:8px; align-items:flex-start}
+    .eyebrow{
+      font-weight:600; 
+      letter-spacing:.2em; 
+      text-transform:uppercase; 
+      font-size:.8rem; 
+      opacity:.8
+    }
+    h1{
+      margin:0; 
+      font-family:"Great Vibes", cursive; 
+      font-weight:800; 
+      line-height:1; 
+      font-size: clamp(42px, 10vw, 86px);
+      background: linear-gradient(90deg, var(--accent), #ff9f1c, var(--accent-2));
+      -webkit-background-clip:text; 
+      background-clip:text; 
+      color:transparent;
+      filter: drop-shadow(0 6px 16px rgba(255,77,109,.25));
+    }
+    .sub{
+      font-size:clamp(16px,2.6vw,22px); 
+      opacity:.9; 
+      max-width:60ch;
+      line-height: 1.5;
+    }
+
+    /* Floating hearts */
+    .heart{
+      position:absolute; 
+      width:16px; 
+      height:16px; 
+      transform:rotate(45deg); 
+      opacity:.65;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .heart::before,.heart::after{
+      content:""; 
+      position:absolute; 
+      width:16px; 
+      height:16px; 
+      background:currentColor; 
+      border-radius:50%
+    }
+    .heart::before{left:-8px}
+    .heart::after{top:-8px}
+    @keyframes floatUp{
+      0%{transform:translateY(0) scale(.9) rotate(45deg)} 
+      100%{transform:translateY(-120vh) scale(1.2) rotate(45deg); opacity:0}
+    }
+
+    /* Grid sections */
+    .grid{
+      display:grid; 
+      gap:24px; 
+      grid-template-columns:repeat(12,1fr);
+      margin-top: 20px;
+    }
+    .col-7{grid-column: span 12}
+    .col-5{grid-column: span 12}
+    @media (min-width:768px){
+      .col-7{grid-column:span 7}
+      .col-5{grid-column:span 5}
+    }
+
+    /* Countdown */
+    .countdown{
+      display:flex; 
+      gap:10px; 
+      flex-wrap:wrap;
+      justify-content: center;
+    }
+    .pill{
+      background:var(--glass); 
+      border:1px solid rgba(0,0,0,.05); 
+      padding:14px 18px; 
+      border-radius:16px; 
+      min-width:92px; 
+      text-align:center;
+      flex: 1;
+      min-width: 70px;
+    }
+    .pill b{display:block; font-size:1.6rem}
+
+    /* Buttons */
+    .btns{
+      display:flex; 
+      flex-wrap:wrap; 
+      gap:12px; 
+      margin-top:18px;
+      align-items: center;
+    }
+    button, .ghost{
+      cursor:pointer; 
+      border:0; 
+      border-radius:999px; 
+      padding:12px 18px; 
+      font-weight:600; 
+      box-shadow:0 10px 20px rgba(0,0,0,.08);
+      font-size: 16px;
+      min-height: 44px; /* Minimum touch target size */
+    }
+    .primary{
+      background:var(--accent); 
+      color:white;
+    }
+    .ghost{
+      background:white; 
+      color:var(--ink); 
+      text-decoration:none; 
+      display:inline-flex; 
+      align-items:center; 
+      gap:8px;
+    }
+    .tiny{font-size:.9rem; opacity:.8}
+
+    /* Gallery */
+    .gallery{
+      display:grid; 
+      grid-template-columns:repeat(auto-fill, minmax(140px,1fr)); 
+      gap:12px;
+      margin-top: 16px;
+    }
+    .ph{
+      position:relative; 
+      overflow:hidden; 
+      border-radius:20px; 
+      aspect-ratio:1/1; 
+      background:rgba(255,255,255,.6)
+    }
+    .ph img{
+      width:100%; 
+      height:100%; 
+      object-fit:cover;
+    }
+
+    /* Wishes */
+    .wish-form{
+      display:flex; 
+      gap:10px; 
+      margin-top:8px;
+      flex-direction: column;
+    }
+    @media (min-width: 480px) {
+      .wish-form {
+        flex-direction: row;
+      }
+    }
+    .wish-form input{
+      flex:1; 
+      padding:12px 14px; 
+      border-radius:12px; 
+      border:1px solid rgba(0,0,0,.12);
+      font-size: 16px; /* Prevent zoom on iOS */
+      min-height: 44px;
+    }
+    .wish-list{
+      display:grid; 
+      gap:10px; 
+      margin-top:14px;
+    }
+    .wish{
+      background:white; 
+      border-radius:14px; 
+      padding:12px 14px; 
+      border:1px solid rgba(0,0,0,.06);
+      word-break: break-word;
+    }
+
+    /* Confetti */
+    .confetti{
+      position:fixed; 
+      top:-10px; 
+      width:10px; 
+      height:14px; 
+      opacity:.9; 
+      pointer-events:none; 
+      animation:fall 2.5s linear forwards;
+      z-index: 1000;
+    }
+    @keyframes fall{
+      to{transform:translateY(110vh) rotate(720deg); opacity:1}
+    }
+
+    /* Audio player styling */
+    audio {
+      width: 100%;
+      margin-top: 16px;
+      min-height: 40px;
+    }
+    audio::-webkit-media-controls-panel {
+      background-color: var(--glass);
+    }
+
+    /* File input styling */
+    input[type="file"] {
+      width: 100%;
+      margin-top: 12px;
+      padding: 12px;
+      border: 1px dashed rgba(0,0,0,0.2);
+      border-radius: 12px;
+      background: var(--glass);
+    }
+
+    footer{
+      margin:40px 0 20px; 
+      text-align:center; 
+      opacity:.7;
+      font-size: 0.9rem;
+    }
+
+    /* Mobile-specific adjustments */
+    @media (max-width: 767px) {
+      header {
+        padding: 20px;
+        text-align: center;
+      }
+      .title {
+        align-items: center;
+      }
+      .btns {
+        justify-content: center;
+      }
+      .countdown {
+        gap: 8px;
+      }
+      .pill {
+        min-width: 60px;
+        padding: 10px 12px;
+      }
+      .pill b {
+        font-size: 1.4rem;
+      }
+      .gallery {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      }
+    }
+
+    @media (max-width: 480px) {
+      .wrap {
+        padding: 12px;
+      }
+      .card {
+        border-radius: 16px;
+        padding: 16px;
+      }
+      header {
+        border-radius: 16px;
+      }
+      h1 {
+        font-size: 2.5rem;
+        text-align: center;
+      }
+      .btns {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .ghost, button {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="bg-canvas" aria-hidden="true" style="position:fixed; inset:0; z-index:-1"></canvas>
+  <div class="wrap">
+    <header class="card">
+      <div class="title">
+        <span class="eyebrow">10 October 2025</span>
+        <h1>Happy Birthday, Muskan ✨</h1>
+        <p class="sub"> <strong>My Dearest Muskan,</strong></p>
+        <p>
+          On this special day, I just want you to know how deeply grateful I am for your love, your laughter, and your presence in my life. You are not only my wife, but also my best friend, my greatest strength, and my happiest place.
+        </p>
+        <p>
+          Every moment with you feels like a blessing, and every day I fall in love with you all over again. You make my world brighter with your smile, softer with your kindness, and more beautiful with your love.
+        </p>
+        <p>
+          Happy Birthday, my love. May this year bring you endless happiness, good health, and all the dreams your heart desires. You deserve the world and more, and I promise to spend my life giving you all the love you've given me.
+        </p>
+        <p>
+          Forever yours,<br>
+          [Your Akshay] ❤️ 💖
+        </p>
+      </div>
+      <div class="btns">
+        <button class="primary" id="surpriseBtn">Surprise!</button>
+        <a class="ghost" href="#music">Play a song ▷</a>
+        <span class="tiny">Made with love by Akshay ✨</span>
+      </div>
+    </header>
+    
+    <section class="grid">
+      <div class="col-7">
+        <div class="card">
+          <h2 style="margin-top:0">Countdown to Your Day 🗓️</h2>
+          <p>Can't wait! The big day arrives in…</p>
+          <div class="countdown" id="countdown">
+            <div class="pill"><b id="dd">0</b>days</div>
+            <div class="pill"><b id="hh">0</b>hours</div>
+            <div class="pill"><b id="mm">0</b>mins</div>
+            <div class="pill"><b id="ss">0</b>secs</div>
+          </div>
+        </div>
+
+        <div class="card" id="music" style="margin-top:24px">
+          <h2 style="margin-top:0">Our Song 🎵</h2>
+          <p>Hit play and vibe. You can replace this file with your own MP3 (rename it to <code>song.mp3</code> and keep it next to this HTML file).</p>
+          <audio id="player" controls preload="auto">
+            <source src="song.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+
+        <div class="card" style="margin-top:24px">
+          <h2 style="margin-top:0">Add a Wish 📝</h2>
+          <form class="wish-form" id="wishForm">
+            <input id="wishInput" placeholder="Type a sweet message for Muskan…" maxlength="140">
+            <button class="primary" type="submit">Add</button>
+          </form>
+          <p style="color: rgb(210, 27, 27); margin-top: 16px;">
+            <strong> Happy birthday my dear wife 💖 </strong> 
+          </p>
+          <div class="wish-list" id="wishList"></div>
+        </div>
+      </div>
+
+      <div class="col-5">
+        <div class="card">
+          <h2 style="margin-top:0">Your Photos 📸</h2>
+		  <img src="https://image2url.com/images/1756449335569-e3754204-d036-44de-88d0-d0dd4a43f96a.jpeg" alt="Muskan Thakur" width=350px>
+          <p>Upload a few favorite moments. They never leave your device—everything is local.</p>
+          <input id="file" type="file" accept="image/*" multiple>
+          <div class="gallery" id="gallery"></div>
+        </div>
+
+        <div class="card" style="margin-top:24px">
+          <h2 style="margin-top:0">Why You're Amazing 💐</h2>
+          <ul style="margin:0; padding-left:18px">
+            <li>Your smile can rescue any day.</li>
+            <li>You love with your whole heart.</li>
+            <li>Your laughter = my favorite sound.</li>
+            <li>With you, ordinary moments glow.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <footer>© 2025 RDX Akshay ➝ For Muskan,✨ forever &amp; always.</footer>
+  </div>
+
+  <script>
+    // ===== Floating hearts background =====
+    let heartTimer;
+    function spawnHeart(){
+      const h = document.createElement('div');
+      h.className = 'heart';
+      const size = Math.random()*16 + 10; // 10-26
+      h.style.width = h.style.height = size + 'px';
+      h.style.left = Math.random()*100 + 'vw';
+      h.style.bottom = '-20px';
+      h.style.color = Math.random() > .5 ? 
+        getComputedStyle(document.documentElement).getPropertyValue('--accent') : 
+        getComputedStyle(document.documentElement).getPropertyValue('--accent-2');
+      h.style.animation = `floatUp ${4 + Math.random()*6}s linear`;
+      document.body.appendChild(h);
+      setTimeout(() => h.remove(), 11000);
+    }
+    function startHearts(){ heartTimer = setInterval(spawnHeart, 600) }
+    function stopHearts(){ clearInterval(heartTimer) }
+    startHearts();
+
+    // ===== Countdown (Asia/Kolkata) =====
+    const target = new Date('2025-10-10T00:00:00+05:30').getTime();
+    const dd = document.getElementById('dd');
+    const hh = document.getElementById('hh');
+    const mm = document.getElementById('mm');
+    const ss = document.getElementById('ss');
+    
+    function updateCountdown(){
+      const now = Date.now();
+      let diff = Math.max(0, target - now);
+      const days = Math.floor(diff / (1000*60*60*24)); 
+      diff -= days*24*60*60*1000;
+      const hours = Math.floor(diff / (1000*60*60)); 
+      diff -= hours*60*60*1000;
+      const mins = Math.floor(diff / (1000*60)); 
+      diff -= mins*60*1000;
+      const secs = Math.floor(diff / 1000);
+      
+      dd.textContent = days; 
+      hh.textContent = hours; 
+      mm.textContent = mins; 
+      ss.textContent = secs;
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // ===== Wishes with localStorage =====
+    const wishForm = document.getElementById('wishForm');
+    const wishInput = document.getElementById('wishInput');
+    const wishList = document.getElementById('wishList');
+    const KEY = 'muskan-wishes-v1';
+    
+    function renderWishes(){
+      wishList.innerHTML = '';
+      const arr = JSON.parse(localStorage.getItem(KEY) || '[]');
+      arr.forEach((t, i) => {
+        const div = document.createElement('div');
+        div.className = 'wish';
+        div.innerHTML = `
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:10px">
+            <span>${escapeHtml(t)}</span>
+            <button class="ghost tiny" data-i="${i}">✕</button>
+          </div>
+        `;
+        div.querySelector('button').addEventListener('click', e => {
+          const idx = +e.currentTarget.dataset.i;
+          const arr = JSON.parse(localStorage.getItem(KEY) || '[]');
+          arr.splice(idx, 1); 
+          localStorage.setItem(KEY, JSON.stringify(arr)); 
+          renderWishes();
+        });
+        wishList.appendChild(div);
+      });
+    }
+    
+    function escapeHtml(s){
+      return s.replace(/[&<>"]+/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]));
+    }
+    
+    wishForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const v = wishInput.value.trim();
+      if(!v) return;
+      
+      const arr = JSON.parse(localStorage.getItem(KEY) || '[]');
+      arr.unshift(v);
+      localStorage.setItem(KEY, JSON.stringify(arr));
+      wishInput.value = '';
+      renderWishes();
+      confettiBurst();
+    });
+    
+    renderWishes();
+
+    // ===== Gallery uploader =====
+    const fileInput = document.getElementById('file');
+    const gallery = document.getElementById('gallery');
+    
+    fileInput.addEventListener('change', async (e) => {
+      const files = Array.from(e.target.files || []);
+      for(const f of files){
+        if(!f.type.startsWith('image/')) continue;
+        const url = URL.createObjectURL(f);
+        const ph = document.createElement('div');
+        ph.className = 'ph';
+        const img = document.createElement('img');
+        img.src = url; 
+        img.alt = f.name;
+        ph.appendChild(img);
+        gallery.prepend(ph);
+      }
+      e.target.value = '';
+    });
+
+    // ===== Surprise button: confetti =====
+    const surpriseBtn = document.getElementById('surpriseBtn');
+    surpriseBtn.addEventListener('click', confettiBurst);
+
+    function confettiBurst(){
+      const pieces = 120;
+      for(let i = 0; i < pieces; i++){
+        const c = document.createElement('div');
+        c.className = 'confetti';
+        c.style.left = Math.random()*100 + 'vw';
+        c.style.transform = `translateY(-10px) rotate(${Math.random()*360}deg)`;
+        c.style.background = `hsl(${Math.random()*360}, 90%, 60%)`;
+        c.style.animationDuration = (1.8 + Math.random()*1.2) + 's';
+        document.body.appendChild(c);
+        setTimeout(() => c.remove(), 3000);
+      }
+    }
+
+    // ===== Soft animated background dots on canvas =====
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
+    let dots = [];
+    
+    function resize(){ 
+      canvas.width = innerWidth; 
+      canvas.height = innerHeight; 
+      makeDots(); 
+    }
+    
+    function makeDots(){
+      const n = Math.max(40, Math.floor((innerWidth*innerHeight)/45000));
+      dots = Array.from({length:n}, () => ({
+        x: Math.random()*canvas.width,
+        y: Math.random()*canvas.height,
+        r: Math.random()*2+0.5,
+        s: Math.random()*0.6+0.2
+      }));
+    }
+    
+    function draw(){
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for(const d of dots){
+        ctx.beginPath(); 
+        ctx.arc(d.x, d.y, d.r, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(255,255,255,0.6)'; 
+        ctx.fill();
+        d.y += d.s; 
+        if(d.y > canvas.height) d.y = -10;
+      }
+      requestAnimationFrame(draw);
+    }
+    
+    addEventListener('resize', resize); 
+    resize(); 
+    draw();
+
+    // Auto-play audio when the page loads (with user interaction requirement)
+    document.addEventListener('DOMContentLoaded', function() {
+      // Try to autoplay audio (may require user interaction on some devices)
+      const audio = document.getElementById('player');
+      const playButton = document.querySelector('a[href="#music"]');
+      
+      playButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        audio.play().catch(e => {
+          console.log('Audio play failed:', e);
+          // Show a message that user needs to interact to play
+          alert('Please tap the audio player to start the music');
+        });
+        // Scroll to music section
+        document.getElementById('music').scrollIntoView({behavior: 'smooth'});
+      });
+    });
+  </script>
+</body>
+</html>
